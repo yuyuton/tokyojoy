@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">Edit Spot</h1>
+    <div class="col-6 offset-3">
+        <form action="/spots/<%=spot._id%>?_method=PUT" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="spot[title]"
+                    value="<%=spot.title %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="spot[location]"
+                    value="<%=spot.location %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="type">Type</label>
+                <input class="form-control" type="text" id="type" name="spot[type]"
+                    value="<%=spot.type %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image Url</label>
+                <input class="form-control" type="text" id="image" name="spot[image]"
+                    value="<%=spot.image %>">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description"
+                    name="spot[description]"><%= spot.description%></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary">Update Spot</button>
+            </div>
+        </form>
+        <a href="/spots/<%= spot._id%>">Back To Spot</a>
+      </div>
+</div>
