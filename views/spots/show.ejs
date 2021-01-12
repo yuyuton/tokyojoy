@@ -1,16 +1,16 @@
 <% layout('layouts/boilerplate')%>
 
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6">
         <div class="card mb-3">
             <img src="<%= spot.image%>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><%= spot.title%></h5>
-                <p class="card-text"><%= spot.description%></p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%= spot.location%></li>
                 <li class="list-group-item"><%= spot.type%></li>
+                <li class="list-group-item"><%= spot.description%></li>
             </ul>
             <div class="card-body">
                 <a class="card-link btn btn-outline-primary" href="/spots/<%=spot._id%>/edit"><i class="bi bi-pencil"></i> Edit</a>
@@ -19,5 +19,31 @@
                 </form>
             </div>
         </div>
+      </div>
+
+      <div class="col-6">
+             <h2>Post your review about <%= spot.title%>!</h2>
+             <form action="/spots/<%=spot._id%>/reviews" method="POST" class="mb-3 needs-validation" novalidate>
+                 <div class="mb-3">
+                     <label class="form-label" for="rating">Rating</label>
+                     <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                 </div>
+                 <div class="mb-3">
+                     <label class="form-label" for="body">Review</label>
+                     <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                 </div>
+                 <button class="btn btn-outline-success"><i class="bi bi-chat-left-text"></i></i> Submit</button>
+             </form>
+             <% for(let review of spot.reviews) { %>
+             <div class="card mb-3 ">
+                 <div class="card-body">
+                     <h5 class="card-title">Rating: <%= review.rating %></h5>
+                     <p class="card-text">Review: <%= review.body %></p>
+                     <form action="/spots/<%=spot._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                         <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+                     </form>
+                 </div>
+             </div>
+        <% } %>
     </div>
 </div>

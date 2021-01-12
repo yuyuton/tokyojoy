@@ -3,9 +3,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
-const Spot = require('./models/spot');
+const session = require('express-session');
+const flash = require('connect-flash');
 
-mongoose.connect('mongodb://localhost:27017/tokyoJoy', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+const spots = require('./routes/spots');
+const reviews = require('./routes/reviews');
+
+mongoose.connect('mongodb://localhost:27017/tokyoJoy', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -17,52 +21,29 @@ const app = express();
 
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+app.use(session({ cookie: { maxAge: 60000 },
+                  secret: 'woot',
+                  resave: false,
+                  saveUninitialized: false}));
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  next();
+})
+
+app.use('/spots', spots);
+app.use('/spots/:id/reviews', reviews);
+
 app.get('/', (req, res) => {
   res.render('home')
 });
-
-app.get('/spots', async (req, res) => {
-  const spots = await Spot.find({});
-  res.render('spots/index', { spots })
-});
-
-app.get('/spots/new', (req, res) => {
-    res.render('spots/new');
-})
-
-app.post('/spots', async (req, res) => {
-    const spot = new Spot(req.body.spot);
-    await spot.save();
-    res.redirect(`/spots/${spot._id}`)
-})
-
-app.get('/spots/:id', async (req, res,) => {
-    const spot = await Spot.findById(req.params.id)
-    res.render('spots/show', { spot });
-});
-
-app.get('/spots/:id/edit', async (req, res) => {
-    const spot = await Spot.findById(req.params.id)
-    res.render('spots/edit', { spot });
-})
-
-app.put('/spots/:id', async (req, res) => {
-    const { id } = req.params;
-    const spot = await Spot.findByIdAndUpdate(id, { ...req.body.spot });
-    res.redirect(`/spots/${spot._id}`)
-});
-
-app.delete('/spots/:id', async (req, res) => {
-    const { id } = req.params;
-    await Spot.findByIdAndDelete(id);
-    res.redirect('/spots');
-})
-
 
 app.listen(3000, () => {
   console.log("Ok")
