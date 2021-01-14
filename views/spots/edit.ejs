@@ -21,17 +21,17 @@
             <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
                 <input class="form-control" type="text" id="image" name="spot[image]"
-                    value="<%=spot.image %>">
+                    value="<%=spot.image %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description"
-                    name="spot[description]"><%= spot.description%></textarea>
+                    name="spot[description]"required> <%= spot.description%> </textarea>
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Update Spot</button>
             </div>
         </form>
-        <a href="/spots/<%= spot._id%>">Back To Spot</a>
+        <a href="/spots/<%= spot._id%>"> Back To Spot</a>
       </div>
 </div>

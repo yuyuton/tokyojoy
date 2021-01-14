@@ -8,6 +8,10 @@ const SpotSchema = new Schema({
   description: String,
   location: String,
   image: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   reviews: [
     {
       type: Schema.Types.ObjectID,
@@ -18,7 +22,7 @@ const SpotSchema = new Schema({
 
 SpotSchema.post('findOneAndDelete', async function (doc) {
   if (doc) {
-    await Review.deleMany({
+    await Review.deleteMany({
       _id: {
         $in: doc.reviews
       }

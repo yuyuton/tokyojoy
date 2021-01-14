@@ -9,19 +9,23 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%= spot.location%></li>
+                <li class="list-group-item">Submitted by @<%=spot.author.username%></li>
                 <li class="list-group-item"><%= spot.type%></li>
                 <li class="list-group-item"><%= spot.description%></li>
             </ul>
+            <% if( currentUser && spot.author.equals(currentUser._id)){  %>
             <div class="card-body">
                 <a class="card-link btn btn-outline-primary" href="/spots/<%=spot._id%>/edit"><i class="bi bi-pencil"></i> Edit</a>
                 <form class="d-inline" action="/spots/<%=spot._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-outline-danger" disabled><i class="bi bi-trash"></i> Delete</button>
+                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
                 </form>
             </div>
+            <%} %>
         </div>
       </div>
 
       <div class="col-6">
+             <% if(currentUser){ %>
              <h2>Post your review about <%= spot.title%>!</h2>
              <form action="/spots/<%=spot._id%>/reviews" method="POST" class="mb-3 needs-validation" novalidate>
                  <div class="mb-3">
@@ -32,16 +36,22 @@
                      <label class="form-label" for="body">Review</label>
                      <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
                  </div>
-                 <button class="btn btn-outline-success"><i class="bi bi-chat-left-text"></i></i> Submit</button>
+                 <button class="btn btn-outline-success"><i class="bi bi-chat-left-text"></i> Submit</button>
              </form>
+             <% } else { %>
+               <h2>Log in to post your review about <%= spot.title%>!</h2>
+             <% } %>
              <% for(let review of spot.reviews) { %>
              <div class="card mb-3 ">
                  <div class="card-body">
                      <h5 class="card-title">Rating: <%= review.rating %></h5>
+                     <h6 class="card-subtitle mb-2 text-muted">By @<%= review.author.username%></h6>
                      <p class="card-text">Review: <%= review.body %></p>
+                     <%  if( currentUser && review.author.equals(currentUser._id))  {%>
                      <form action="/spots/<%=spot._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                          <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
                      </form>
+                     <%} %>
                  </div>
              </div>
         <% } %>
