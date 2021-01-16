@@ -1,17 +1,25 @@
 <% layout('layouts/boilerplate')%>
-<h1>Register</h1>
+<h1>create an account</h1>
 <form action="/register" method="POST" class="needs-validation col-4" novalidate>
     <div class="mb-3">
         <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username" required>
+        <input class="form-control" type="text" id="username" name="username">
     </div>
     <div class="mb-3">
         <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="email" id="email" name="email" required>
+        <input class="form-control" type="email" id="email" name="email">
     </div>
     <div class="mb-3">
         <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password" required>
+        <input class="form-control" type="password" id="password" name="password">
     </div>
-    <button class="btn btn-outline-primary"><i class="bi bi-clipboard-plus"></i> Register</button>
+    <button class="btn btn-outline-primary"><i class="bi bi-clipboard-plus"></i> Sign up</button>
 </form>
+<br>
+<div class="col-sm-4">
+  <div class="card">
+    <div class="card-body">
+      <a class="btn btn-block" href="/auth/google" role="button"><i class="bi bi-google"></i> Sign up with Google</a>
+    </div>
+  </div>
+</div>
