@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffe6e6;" >
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-        <img src="https://4.bp.blogspot.com/-22AkJ4RfDx8/U9y_noGiRSI/AAAAAAAAjf4/SeSbXunubXQ/s800/tenki_mark05_kumori.png" width="70" class="d-inline-block" alt="" loading="lazy">
+        <img src="https://4.bp.blogspot.com/-22AkJ4RfDx8/U9y_noGiRSI/AAAAAAAAjf4/SeSbXunubXQ/s800/tenki_mark05_kumori.png" class="d-inline-block align-center" width="70" alt="" loading="lazy">
         TokyoJoy!
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/spots">All Spots</a>
-                <a class="nav-link" href="/spots/new">New Spot</a>
-            </div>
-            <div class="navbar-nav mr-0">
+            <ul class="navbar-nav me-auto">
+                <li class"nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class"nav-item"><a class="nav-link" href="/spots">All Spots</a></li>
+                <li class"nav-item"><a class="nav-link" href="/spots/new">New Spot</a></li>
+            </ul>
+            <ul class="navbar-nav">
                 <% if(!currentUser) {%>
-                <a class="nav-link" href="/login">Sign in</a>
-                <a class="nav-link" href="/register">Sign up</a>
+                <li class"nav-item"><a class="nav-link" href="/login">Sign in</a></li>
+                <li class"nav-item"><a class="nav-link" href="/register">Sign up</a></li>
                 <% } else {%>
-                <a class="nav-link" href="/logout">Sign out</a>
+                <li class"nav-item"><a class="nav-link" href="/logout">Sign out</a></li>
                 <% } %>
-            </div>
+            </ul>
         </div>
     </div>
 </nav>
