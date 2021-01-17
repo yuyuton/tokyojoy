@@ -14,6 +14,7 @@
                 <li class="list-group-item"><%= spot.type%></li>
                 <li class="list-group-item"><%= spot.description%></li>
             </ul>
+            <div id='map' style='width: 100%; height: 300px;'></div>
             <% if( currentUser && spot.author.equals(currentUser._id)){  %>
             <div class="card-body">
                 <a class="card-link btn btn-outline-primary" href="/spots/<%=spot._id%>/edit"><i class="bi bi-pencil"></i> Edit</a>
@@ -72,3 +73,10 @@
         <% } %>
     </div>
 </div>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const spot = <%- JSON.stringify(spot) %>
+</script>
+
+<script src="/js/showPageMap.js"></script>

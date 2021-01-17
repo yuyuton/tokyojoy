@@ -1,4 +1,7 @@
 const Spot = require('../models/spot');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
   const spots = await Spot.find({});
@@ -10,7 +13,12 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createSpot = async (req, res) => {
+    const geoData = await geocoder.forwardGeocode({
+      query: req.body.spot.title,
+      limit: 1
+    }).send()
     const spot = new Spot(req.body.spot);
+    spot.geometry = geoData.body.features[0].geometry;
     spot.author = req.user._id;
     await spot.save();
     req.flash('success', 'Successfully create a new spot blog!')
