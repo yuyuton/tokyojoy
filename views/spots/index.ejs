@@ -1,5 +1,31 @@
 <% layout('layouts/boilerplate')%>
 
+<div class="container">
+<div class="row">
+<div class="card text-center todayWeather" style="width: 11rem;">
+  <%const todayImg = "http://openweathermap.org/img/wn/"+ weatherData.daily[0].weather[0].icon +"@2x.png";
+  const todayDate = new Date(weatherData.daily[0].dt * 1000).toLocaleDateString('ja-JP')%>
+  <img src=<%= todayImg%> class="card-img-top">
+  <div class="card-body">
+    <p class="card-text">Today (<%=todayDate%>)</p>
+    <p class="card-text"><%=weatherData.daily[0].weather[0].description%></p>
+    <p class="card-text"><%=weatherData.daily[0].temp.max%> / <%=weatherData.daily[0].temp.min%> &#8451</p>
+  </div>
+</div>
+<div class="card text-center tomorrowWeather" style="width: 11rem;">
+  <%const tomorrowImg = "http://openweathermap.org/img/wn/"+ weatherData.daily[1].weather[0].icon +"@2x.png";
+  const tomorrowDate = new Date(weatherData.daily[1].dt * 1000).toLocaleDateString('ja-JP')%>
+  <img src=<%= tomorrowImg%> class="card-img-top">
+  <div class="card-body">
+    <p class="card-text">Tomorrow (<%=tomorrowDate%>)</p>
+    <p class="card-text"><%=weatherData.daily[1].weather[0].description%></p>
+    <p class="card-text"><%=weatherData.daily[1].temp.max%> / <%=weatherData.daily[1].temp.min%> &#8451</p>
+  </div>
+</div>
+</div>
+</div>
+
+
 <h1>All Spots</h1>
 <div>
     <a href="/spots/new">Add Spot</a>

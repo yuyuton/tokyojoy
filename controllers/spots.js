@@ -2,10 +2,18 @@ const Spot = require('../models/spot');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+const https = require("https");
+const weatherID = process.env.WEATHER_ID;
 
 module.exports.index = async (req, res) => {
   const spots = await Spot.find({});
-  res.render('spots/index', { spots })
+  const url = "https://api.openweathermap.org/data/2.5/onecall?lat=35.65&lon=139.84&exclude=hourly,minutely&units=metric&appid="+weatherID;
+  https.get(url, function(response){
+    response.on("data", function(data){
+      const weatherData = JSON.parse(data)
+      res.render('spots/index', { spots, weatherData })
+    })
+  })
 };
 
 module.exports.renderNewForm = (req, res) => {
