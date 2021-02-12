@@ -17,12 +17,16 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const spotRoutes = require('./routes/spots');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes =  require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/tokyoJoy', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
+const MongoDBStore = require("connect-mongo")(session);
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/tokyojoy';
+mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -40,8 +44,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-app.use(session({ cookie: { maxAge: 60000000 },
-                  secret: 'woot',
+app.use(mongoSanitize({
+    replaceWith: '_'
+}))
+
+const secret = process.env.SECRET || 'woot';
+
+const store = new MongoDBStore({
+    url:dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e)
+})
+
+app.use(session({ store,
+                  cookie: { maxAge: 60000000 },
+                  secret,
                   resave: false,
                   saveUninitialized: false}));
 app.use(flash());
@@ -100,6 +121,8 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Something Wrong!'
     res.status(statusCode).render('error', { err })
 })
+
+
 
 app.listen(3000, () => {
   console.log("Ok")

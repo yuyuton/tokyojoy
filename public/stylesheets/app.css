@@ -3,7 +3,9 @@ body {
   height: 100%;
 }
 
-
+.index-title {
+  padding: 1% 15%;
+}
 
 .form-signin {
   width: 100%;
