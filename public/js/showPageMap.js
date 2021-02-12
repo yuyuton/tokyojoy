@@ -6,6 +6,8 @@ const map = new mapboxgl.Map({
     zoom: 13
 });
 
+map.addControl(new mapboxgl.NavigationControl());
+
 new mapboxgl.Marker()
     .setLngLat(spot.geometry.coordinates)
     .setPopup(

@@ -1,25 +1,21 @@
 <% layout('layouts/boilerplate')%>
-<h1>create an account</h1>
-<form action="/register" method="POST" class="needs-validation col-4" novalidate>
+
+<form action="/register" method="POST" class="needs-validation col-4 form-signin" novalidate>
+    <h1>Sign up</h1>
+    <br>
     <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username">
+        <label class="visually-hidden" for="username">Username</label>
+        <input class="form-control" type="username" placeholder="username" id="username" name="username">
     </div>
     <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="email" id="email" name="email">
+        <label class="visually-hidden" for="email">Email</label>
+        <input class="form-control" type="email" placeholder="email" id="email" name="email">
     </div>
     <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password">
+        <label class="visually-hidden" for="password">Password</label>
+        <input class="form-control" type="password" placeholder="password" id="password" name="password">
     </div>
-    <button class="btn btn-outline-primary"><i class="bi bi-clipboard-plus"></i> Sign up</button>
+    <button class="w-100 btn btn-primary">Sign up</button>
+    <hr>
+    <a class="btn btn-lg btn-outline-primary form-control" href="/auth/google" role="button"><i class="bi bi-google"></i> Sign up with Google</a>
 </form>
-<br>
-<div class="col-sm-4">
-  <div class="card">
-    <div class="card-body">
-      <a class="btn btn-block" href="/auth/google" role="button"><i class="bi bi-google"></i> Sign up with Google</a>
-    </div>
-  </div>
-</div>
