@@ -87,8 +87,9 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: absoluteURI + "/auth/google/tokyojoy",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+    callbackURL: "https://tokyojoy.herokuapp.com/auth/google/tokyojoy",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+    proxy: true
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ googleId: profile.id, username: profile.displayName }, function (err, user) {
