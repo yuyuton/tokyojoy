@@ -2,10 +2,14 @@
 
 TokyoJoy is a full stack web application that allows users to login, post, view, edit and delete travel reviews, view locations of spots through embedded map, and post comments on reviews posted by others.
 
+* * *
+
 <br>
 
 ![image](https://user-images.githubusercontent.com/60643858/107855022-4bf38400-6e63-11eb-8bdb-05287e9a6dfe.png)
 - Cover page of the web application
+
+* * *
 
 <br>
 
@@ -13,10 +17,14 @@ TokyoJoy is a full stack web application that allows users to login, post, view,
 - Index page to display all spot reviews posted by users
 - Utilized OpenWeather API to present real-time weather forecasting
 
+* * *
+
 <br>
 
 ![image](https://user-images.githubusercontent.com/60643858/107854929-b22bd700-6e62-11eb-8a06-1626411232e8.png)
 - Users can sign in via both local authentication and Google Account (Google OAuth 2.0) 
+
+* * *
 
 <br>
 
