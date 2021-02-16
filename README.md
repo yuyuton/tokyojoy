@@ -1,5 +1,7 @@
 # TokyoJoy
 
+You can access the demo via [https://tokyojoy.herokuapp.com/](https://tokyojoy.herokuapp.com/)
+
 TokyoJoy is a full stack web application that allows users to login, post, view, edit and delete travel reviews, view locations of spots through embedded map, and post comments on reviews posted by others.
 
 * * *
