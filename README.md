@@ -1,11 +1,11 @@
 # TokyoJoy
 
-You can access the demo via [https://tokyojoy.herokuapp.com/](https://tokyojoy.herokuapp.com/)
-サイトにアクセス：[https://tokyojoy.herokuapp.com/](https://tokyojoy.herokuapp.com/)、(開くまでちょっと時間かかります)
+- You can access the demo via [https://tokyojoy.herokuapp.com/](https://tokyojoy.herokuapp.com/)
+- サイトにアクセス：[https://tokyojoy.herokuapp.com/](https://tokyojoy.herokuapp.com/)、(開くまでちょっと時間かかります)
 
 
-TokyoJoy is a full stack web application that allows users to login, post, view, edit and delete travel reviews, view locations of spots through embedded map, and post comments on reviews posted by others.
-このサイトの機能：ユーザー登録、ログイン、観光スポットに対してレビューを投稿など。
+- TokyoJoy is a full stack web application that allows users to login, post, view, edit and delete travel reviews, view locations of spots through embedded map, and post comments on reviews posted by others.
+- このサイトの機能：ユーザー登録、ログイン、観光スポットに対してレビューを投稿など。
 
 
 * * *
